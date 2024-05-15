@@ -8,7 +8,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LocationApi", "deployable p
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TractorService", "deployable projects\TractorService\TractorService.csproj", "{E1371C05-BB38-461F-A443-8FA51281CDCC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlarmService", "deployable projects\AlarmService\AlarmService.csproj", "{766E3499-39A6-4504-AA11-B622A45E1897}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlarmService", "deployable projects\AlarmService\AlarmService.csproj", "{6C740AF1-2C26-4B3C-9986-04B0CC91659E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -32,9 +32,9 @@ Global
 		{E1371C05-BB38-461F-A443-8FA51281CDCC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E1371C05-BB38-461F-A443-8FA51281CDCC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E1371C05-BB38-461F-A443-8FA51281CDCC}.Release|Any CPU.Build.0 = Release|Any CPU
-		{766E3499-39A6-4504-AA11-B622A45E1897}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{766E3499-39A6-4504-AA11-B622A45E1897}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{766E3499-39A6-4504-AA11-B622A45E1897}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{766E3499-39A6-4504-AA11-B622A45E1897}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6C740AF1-2C26-4B3C-9986-04B0CC91659E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6C740AF1-2C26-4B3C-9986-04B0CC91659E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6C740AF1-2C26-4B3C-9986-04B0CC91659E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6C740AF1-2C26-4B3C-9986-04B0CC91659E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
