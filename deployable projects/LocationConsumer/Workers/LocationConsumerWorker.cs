@@ -16,6 +16,7 @@ public class LocationConsumerWorker : BackgroundService
     
     protected async Task HandleMessage(CoordinateMessage message, CancellationToken cancellationToken)
     {
+        //TODO put message into database
         Console.WriteLine(message);
         await Task.CompletedTask;
     }

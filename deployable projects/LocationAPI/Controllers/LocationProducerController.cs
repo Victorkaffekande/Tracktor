@@ -30,6 +30,7 @@ public class LocationProducerController : ControllerBase
                 Timestamp = DateTime.Now
             }
         };
+        //TODO figure out how to see if message didn't send, and handle failed messages? (Maybe)
         var res = await _producer.ProduceAsync(LocationsTopicName, message);
         _producer.Flush();
         return Ok(res.Value);
