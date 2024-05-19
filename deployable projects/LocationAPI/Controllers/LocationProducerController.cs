@@ -1,6 +1,6 @@
 using Confluent.Kafka;
-using LocationAPI.Domain;
 using Microsoft.AspNetCore.Mvc;
+using SharedModels;
 
 namespace LocationAPI.Controllers;
 

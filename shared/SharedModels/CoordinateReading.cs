@@ -1,4 +1,4 @@
-﻿namespace LocationAPI.Domain;
+﻿namespace SharedModels;
 
 public class CoordinateReading
 {

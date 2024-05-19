@@ -1,10 +1,8 @@
 using Confluent.Kafka;
 using Confluent.SchemaRegistry;
 using Confluent.SchemaRegistry.Serdes;
-using LocationAPI.Domain;
 using Microsoft.Extensions.Options;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
+using SharedModels;
 
 var builder = WebApplication.CreateBuilder(args);
 
