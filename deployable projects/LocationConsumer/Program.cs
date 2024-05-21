@@ -9,6 +9,7 @@ using SharedModels;
 
 DotNetEnv.Env.Load("../../../.env");
 
+
 IHost host = Host.CreateDefaultBuilder(args)
     .ConfigureServices((hostContext, services) =>
     {
