@@ -9,10 +9,10 @@ using SharedModels;
 
 DotNetEnv.Env.Load("../../../.env");
 
-
 IHost host = Host.CreateDefaultBuilder(args)
     .ConfigureServices((hostContext, services) =>
     {
+        //test
         services.Configure<ConsumerConfig>(hostContext.Configuration.GetSection("Kafka")); 
         services.AddSingleton<IConsumer<String, CoordinateMessage>>(sp =>
         {
