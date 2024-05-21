@@ -7,10 +7,12 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SharedModels;
 
+DotNetEnv.Env.Load("../../../.env");
+
 IHost host = Host.CreateDefaultBuilder(args)
     .ConfigureServices((hostContext, services) =>
     {
-        services.Configure<ConsumerConfig>(hostContext.Configuration.GetSection("Consumer")); 
+        services.Configure<ConsumerConfig>(hostContext.Configuration.GetSection("Kafka")); 
         services.AddSingleton<IConsumer<String, CoordinateMessage>>(sp =>
         {
             var config = sp.GetRequiredService<IOptions<ConsumerConfig>>();

@@ -13,7 +13,7 @@
 *.user
 *.userosscache
 *.sln.docstates
-**/appsettings*.json  
+.env
 
 
 # User-specific files (MonoDevelop/Xamarin Studio)
