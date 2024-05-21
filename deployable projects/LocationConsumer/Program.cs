@@ -7,11 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SharedModels;
 
-DotNetEnv.Env.Load();
-
-Console.WriteLine($"BootstrapServers: {Environment.GetEnvironmentVariable("Consumer__BootstrapServers")}");  
-Console.WriteLine($"SaslUsername: {Environment.GetEnvironmentVariable("Consumer__SaslUsername")}");  
-Console.WriteLine($"SaslPassword: {Environment.GetEnvironmentVariable("Consumer__SaslPassword")}");  
+DotNetEnv.Env.Load("../../../.env");
 
 IHost host = Host.CreateDefaultBuilder(args)
     .ConfigureServices((hostContext, services) =>
