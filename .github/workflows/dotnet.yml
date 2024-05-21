@@ -19,6 +19,12 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
+    env:  
+      Kafka__BootstrapServers: ${{ secrets.Kafka__BootstrapServers }}   
+      Kafka__SaslUsername: ${{ secrets.Kafka__SaslUsername }}  
+      Kafka__SaslPassword: ${{ secrets.Kafka__SaslPassword }} 
+      SchemaRegistry__URL: ${{ secrets.SchemaRegistry__URL }} 
+      SchemaRegistry__BasicAuthUserInfo: ${{ secrets.SchemaRegistry__BasicAuthUserInfo }} 
 
     steps:
     - uses: actions/checkout@v4
