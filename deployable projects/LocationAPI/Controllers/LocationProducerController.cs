@@ -35,4 +35,11 @@ public class LocationProducerController : ControllerBase
         _producer.Flush();
         return Ok(res.Value);
     }
+    
+    
+    
+    
+    
+    
+    
 }

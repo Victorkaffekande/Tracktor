@@ -28,6 +28,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\..\libaries\CassandraFactory\CassandraFactory.csproj" />
       <ProjectReference Include="..\..\shared\SharedModels\SharedModels.csproj" />
     </ItemGroup>
 

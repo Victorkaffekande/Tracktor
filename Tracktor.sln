@@ -12,6 +12,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LocationConsumer", "deploya
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharedModels", "shared\SharedModels\SharedModels.csproj", "{E2B9A451-1A63-4D8C-81C4-C1436E938DBB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CassandraFactory", "libaries\CassandraFactory\CassandraFactory.csproj", "{35F05EE8-A99A-4B92-BA01-91D7C1FBEAC8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -42,5 +44,9 @@ Global
 		{E2B9A451-1A63-4D8C-81C4-C1436E938DBB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E2B9A451-1A63-4D8C-81C4-C1436E938DBB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E2B9A451-1A63-4D8C-81C4-C1436E938DBB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{35F05EE8-A99A-4B92-BA01-91D7C1FBEAC8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{35F05EE8-A99A-4B92-BA01-91D7C1FBEAC8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{35F05EE8-A99A-4B92-BA01-91D7C1FBEAC8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{35F05EE8-A99A-4B92-BA01-91D7C1FBEAC8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

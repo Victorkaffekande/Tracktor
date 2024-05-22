@@ -1,6 +1,8 @@
 using Confluent.Kafka;
 using Confluent.SchemaRegistry;
 using Confluent.SchemaRegistry.Serdes;
+using LocationAPI.repo;
+using LocationAPI.Services;
 using Microsoft.Extensions.Options;
 using SharedModels;
 DotNetEnv.Env.Load();  
@@ -15,6 +17,10 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.Configure<ProducerConfig>(builder.Configuration.GetSection("Kafka"));
 builder.Services.Configure<SchemaRegistryConfig>(builder.Configuration.GetSection("SchemaRegistry"));
+
+builder.Services.AddSingleton(CassandraSessionFactory.CreateCassandraService().Start());
+builder.Services.AddSingleton<ILocationApiRepo, LocationApiRepo>();
+builder.Services.AddSingleton<ILocationApiService, LocationApiService>();
 
 builder.Services.AddSingleton<ISchemaRegistryClient>(sp =>
 {
