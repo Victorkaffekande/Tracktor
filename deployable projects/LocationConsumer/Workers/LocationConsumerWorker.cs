@@ -26,8 +26,8 @@ public class LocationConsumerWorker : BackgroundService
                 Timestamp = message.Timestamp,
                 Latitude = message.Coordinate.Latitude,
                 Longitude = message.Coordinate.Longitude,
-                TractorId = message.VehicleId,
-                CompanyId = new Guid("00000000-0000-0000-0000-000000000000")
+                VehicleId = message.VehicleId,
+                FleetId = new Guid("00000000-0000-0000-0000-000000000000")
             }
         };
         _repo.BatchInsert(locations);

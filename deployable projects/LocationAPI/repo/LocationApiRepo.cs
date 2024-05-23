@@ -13,22 +13,22 @@ public class LocationApiRepo : ILocationApiRepo
         _cassandraSession = cassandraSession;
     }
     
-    public List<Location> GetLocationFromCompany(Guid companyId, DateTime fromTimestamp, DateTime toTimestamp,string monthYear)
+    public List<Location> GetLocationFromCompany(Guid fleetId, DateTime fromTimestamp, DateTime toTimestamp,string hourDate)
     {
         var selectCql = @"
         SELECT * 
         FROM Locations_By_Company 
-        WHERE company_id = ?
-        AND month_year = ?
+        WHERE fleet_id = ?
+        AND hour_date = ?
         AND timestamp >= ? 
         AND timestamp <= ?";
         
-        var statement = _cassandraSession.Prepare(selectCql).Bind(companyId, monthYear,fromTimestamp, toTimestamp);
+        var statement = _cassandraSession.Prepare(selectCql).Bind(fleetId, hourDate,fromTimestamp, toTimestamp);
         var rs = _cassandraSession.Execute(statement);
         var results = rs.Select(row => new Location
         {
-            CompanyId = row.GetValue<Guid>("company_id"),
-            TractorId = row.GetValue<Guid>("tractor_id"),
+            FleetId = row.GetValue<Guid>("fleet_id"),
+            VehicleId = row.GetValue<Guid>("vehicle_id"),
             Timestamp = row.GetValue<DateTime>("timestamp"),
             Latitude = row.GetValue<double>("latitude"),
             Longitude = row.GetValue<double>("longitude")
@@ -42,8 +42,8 @@ public class LocationApiRepo : ILocationApiRepo
         var selectCql = @"
         SELECT * 
         FROM Locations_By_Tractor 
-        WHERE tractor_id = ? 
-        AND month_year = ? 
+        WHERE vehicle_id = ? 
+        AND week_year = ? 
         AND timestamp >= ? 
         AND timestamp <= ?";
         
@@ -51,7 +51,7 @@ public class LocationApiRepo : ILocationApiRepo
         var rs = _cassandraSession.Execute(statement);
         var results = rs.Select(row => new Location
         {
-            TractorId = row.GetValue<Guid>("tractor_id"),
+            VehicleId = row.GetValue<Guid>("vehicle_id"),
             Timestamp = row.GetValue<DateTime>("timestamp"),
             Latitude = row.GetValue<double>("latitude"),
             Longitude = row.GetValue<double>("longitude")
@@ -70,7 +70,7 @@ public class LocationApiRepo : ILocationApiRepo
         var rs = _cassandraSession.Execute(selectCql);
         var results = rs.Select(row => new Location
         {
-            TractorId = row.GetValue<Guid>("tractor_id"),
+            VehicleId = row.GetValue<Guid>("vehicle_id"),
             Timestamp = row.GetValue<DateTime>("timestamp"),
             Latitude = row.GetValue<double>("latitude"),
             Longitude = row.GetValue<double>("longitude")
@@ -88,7 +88,7 @@ public class LocationApiRepo : ILocationApiRepo
         var rs = _cassandraSession.Execute(selectCql);
         var results = rs.Select(row => new Location
         {
-            TractorId = row.GetValue<Guid>("tractor_id"),
+            VehicleId = row.GetValue<Guid>("vehicle_id"),
             Timestamp = row.GetValue<DateTime>("timestamp"),
             Latitude = row.GetValue<double>("latitude"),
             Longitude = row.GetValue<double>("longitude")

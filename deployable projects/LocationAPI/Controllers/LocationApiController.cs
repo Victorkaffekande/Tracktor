@@ -18,19 +18,19 @@ public class LocationApiController : ControllerBase
     
     [HttpGet]
     [Route("LocationFromTractor")]
-    public IActionResult GetLocationFromTractor(Guid tractorId, string monthYear, DateTime fromTimestamp, DateTime toTimestamp)
+    public IActionResult GetLocationFromTractor(Guid vehicleId, string weekYear, DateTime fromTimestamp, DateTime toTimestamp)
     {
        
 
-        return Ok(_locationApiService.GetLocationFromTractor(tractorId,monthYear,fromTimestamp,toTimestamp));
+        return Ok(_locationApiService.GetLocationFromTractor(vehicleId,weekYear,fromTimestamp,toTimestamp));
     }
     
     [HttpGet]
     [Route("LocationFromCompany")]
-    public IActionResult GetLocationFromCompany(Guid companyId, DateTime fromTimestamp, DateTime toTimestamp,string monthYear)
+    public IActionResult GetLocationFromCompany(Guid fleetId, DateTime fromTimestamp, DateTime toTimestamp,string hourDate)
     {
        
-        return Ok(_locationApiService.GetLocationFromCompany(companyId,fromTimestamp,toTimestamp,monthYear ));
+        return Ok(_locationApiService.GetLocationFromCompany(fleetId,fromTimestamp,toTimestamp,hourDate ));
     }
 
     
@@ -46,8 +46,6 @@ public class LocationApiController : ControllerBase
     [Route("TestTractor")]
     public IActionResult TestTractor()
     {
-        
-
         return Ok(_locationApiService.TestTractor());
     }
 }

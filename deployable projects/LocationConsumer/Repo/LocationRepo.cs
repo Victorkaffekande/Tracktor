@@ -20,19 +20,20 @@ public class LocationRepo : ILocationRepo
         var batch = new BatchStatement();
     
         //setting up for batch write into both tables
-        var insertTractorCql = "INSERT INTO Locations_By_Tractor (tractor_id, month_year, timestamp, latitude, longitude) VALUES (?, ?, ?, ?, ?)";
-        var insertCompanyCql = "INSERT INTO Locations_By_Company (company_id, tractor_id, month_year, timestamp, latitude, longitude) VALUES (?, ?, ?, ?, ?, ?)";
+        var insertTractorCql = "INSERT INTO Locations_By_Tractor (vehicle_id, week_year, timestamp, latitude, longitude) VALUES (?, ?, ?, ?, ?)";
+        var insertCompanyCql = "INSERT INTO Locations_By_Company (fleet_id, vehicle_id, hour_date, timestamp, latitude, longitude) VALUES (?, ?, ?, ?, ?, ?)";
     
         var preparedStatementTractor = _cassandraSession.Prepare(insertTractorCql);
         var preparedStatementCompany = _cassandraSession.Prepare(insertCompanyCql);
 
         foreach (var location in locations)
         {
-            var monthYear = location.Timestamp.ToString("yyyy-MM");
+            //TODO Actually calculate the different bucket times
+            var tempbucket = location.Timestamp.ToString("yyyy-MM");
 
             var boundStatementTractor = preparedStatementTractor.Bind(
-                location.TractorId,
-                monthYear,
+                location.VehicleId,
+                tempbucket,
                 location.Timestamp,
                 location.Latitude,
                 location.Longitude
@@ -40,9 +41,9 @@ public class LocationRepo : ILocationRepo
             batch.Add(boundStatementTractor);
 
             var boundStatementCompany = preparedStatementCompany.Bind(
-                location.CompanyId,
-                location.TractorId,
-                monthYear,
+                location.FleetId,
+                location.VehicleId,
+                tempbucket,
                 location.Timestamp,
                 location.Latitude,
                 location.Longitude

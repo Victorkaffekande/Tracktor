@@ -4,10 +4,10 @@ namespace LocationAPI.Services;
 
 public interface ILocationApiService
 {
-    public List<Location> GetLocationFromCompany(Guid companyId, DateTime fromTimestamp, DateTime toTimestamp,
-        string monthYear);
+    public List<Location> GetLocationFromCompany(Guid fleetId, DateTime fromTimestamp, DateTime toTimestamp,
+        string hourDate);
 
-    public List<Location> GetLocationFromTractor(Guid tractorId, string monthYear, DateTime fromTimestamp,
+    public List<Location> GetLocationFromTractor(Guid vehicleId, string weekYear, DateTime fromTimestamp,
         DateTime toTimestamp);
 
     public List<Location> TestTractor();
