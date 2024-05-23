@@ -1,7 +1,7 @@
 version: '3.8'
 
 services:
-  LocationConsumer:
+  location-consumer:
     build:
       context: .
       dockerfile: deployable projects/LocationConsumer/Dockerfile
@@ -15,7 +15,7 @@ services:
     networks:
       - cassandra
   
-  LocationApi:
+  location-api:
     build:
       context: .
       dockerfile: deployable projects/LocationAPI/Dockerfile

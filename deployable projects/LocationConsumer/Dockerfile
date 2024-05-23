@@ -5,6 +5,8 @@ FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 COPY ["deployable projects/LocationConsumer/LocationConsumer.csproj", "deployable projects/LocationConsumer/"]
+COPY ["libaries/CassandraFactory/CassandraFactory.csproj", "libaries/CassandraFactory/"]
+COPY ["shared/SharedModels/SharedModels.csproj", "shared/SharedModels/"]
 RUN dotnet restore "deployable projects/LocationConsumer/LocationConsumer.csproj"
 COPY . .
 WORKDIR "/src/deployable projects/LocationConsumer"
