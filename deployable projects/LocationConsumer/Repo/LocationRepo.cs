@@ -1,4 +1,5 @@
-﻿using Cassandra;
+﻿using System.Globalization;
+using Cassandra;
 using SharedModels;
 
 namespace LocationConsumer.Repo;
@@ -16,7 +17,8 @@ public class LocationRepo : ILocationRepo
     
     public string BatchInsert(List<Location> locations)
     {
-        //doesnt adjust for amount of inserts into the database. 
+        //doesnt adjust for amount of inserts into the database.
+        //TODO limit the amount of locations getting writing per batch write.
         var batch = new BatchStatement();
     
         //setting up for batch write into both tables
@@ -28,22 +30,24 @@ public class LocationRepo : ILocationRepo
 
         foreach (var location in locations)
         {
-            //TODO Actually calculate the different bucket times
-            var tempbucket = location.Timestamp.ToString("yyyy-MM");
-
+            var weekYear = BucketWeekYear(location.Timestamp);  
+            
             var boundStatementTractor = preparedStatementTractor.Bind(
                 location.VehicleId,
-                tempbucket,
+                weekYear,
                 location.Timestamp,
                 location.Latitude,
                 location.Longitude
             );
             batch.Add(boundStatementTractor);
 
+            var hourDate = BucketHourDate(location.Timestamp);  
+
+            
             var boundStatementCompany = preparedStatementCompany.Bind(
                 location.FleetId,
                 location.VehicleId,
-                tempbucket,
+                hourDate,
                 location.Timestamp,
                 location.Latitude,
                 location.Longitude
@@ -54,5 +58,26 @@ public class LocationRepo : ILocationRepo
         _cassandraSession.Execute(batch);
 
         return "Inserted locations successfully";
+    }
+
+    //follows the rules of ISO 8601 
+    public string BucketWeekYear(DateTime timestamp)
+    {
+        var week = ISOWeek.GetWeekOfYear(timestamp);
+        
+        var year = timestamp.ToString("yyyy");
+        
+        //examples 1-2024 or 12-2025
+        var result = week + "-" + year;
+
+        return result;
+    }
+    
+    public string BucketHourDate(DateTime timestamp)
+    {
+        //examples 11-30-00-2024 ie "hh-dd-mm-yyyy"
+        var hourDate = timestamp.ToString("hh-dd-mm-yyyy");
+        
+        return hourDate;
     }
 }
