@@ -5,13 +5,13 @@ services:
     build:
       context: .
       dockerfile: deployable projects/LocationConsumer/Dockerfile
+    env_file:
+      - deployable projects/LocationConsumer/.env
     depends_on:
       cassandra-1:
         condition: service_healthy
-      cassandra-2:
-        condition: service_healthy
-      cassandra-3:
-        condition: service_healthy
+      location-api:
+        condition: service_started
     networks:
       - cassandra
   
@@ -19,12 +19,10 @@ services:
     build:
       context: .
       dockerfile: deployable projects/LocationAPI/Dockerfile
+    env_file:
+      - deployable projects/LocationApi/.env
     depends_on:
       cassandra-1:
-        condition: service_healthy
-      cassandra-2:
-        condition: service_healthy
-      cassandra-3:
         condition: service_healthy
     ports:
       - "5005:80"
@@ -60,7 +58,7 @@ services:
       - cassandra
     depends_on:
       cassandra-1:
-        condition: service_healthy
+        condition: service_started
     healthcheck:
       test: ["CMD-SHELL", "nodetool status | grep UN"]
       interval: 30s
@@ -77,7 +75,7 @@ services:
       - cassandra
     depends_on:
       cassandra-2:
-        condition: service_healthy
+        condition: service_started
     healthcheck:
       test: ["CMD-SHELL", "nodetool status | grep UN"]
       interval: 30s

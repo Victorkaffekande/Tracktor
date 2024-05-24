@@ -43,12 +43,12 @@ public class CassandraSessionFactory
         latitude DOUBLE,
         longitude DOUBLE,
         PRIMARY KEY ((fleet_id, hour_date), timestamp, vehicle_id)
-        )WITH default_time_to_live = 86400; 
-        WITH compaction = {
-            'class' : 'TimeWindowCompactionStrategy',
-            'compaction_window_unit' : 'HOURS',
-            'compaction_window_size' : 24
-        };");
+    ) WITH default_time_to_live = 86400
+    AND compaction = {
+        'class' : 'TimeWindowCompactionStrategy',
+        'compaction_window_unit' : 'HOURS',
+        'compaction_window_size' : 24
+    };");
 
         return new CassandraService(keyspaceSession);
     }
