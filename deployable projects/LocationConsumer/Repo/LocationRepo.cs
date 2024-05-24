@@ -15,11 +15,10 @@ public class LocationRepo : ILocationRepo
     }
     
     
-    public string BatchInsert(List<Location> locations)
+    public async Task<string> BatchInsert(List<Location> locations)
     {
         //doesnt adjust for amount of inserts into the database.
         //TODO limit the amount of locations getting writing per batch write.
-        var batch = new BatchStatement();
     
         //setting up for batch write into both tables
         var insertTractorCql = "INSERT INTO Locations_By_Tractor (vehicle_id, week_year, timestamp, latitude, longitude) VALUES (?, ?, ?, ?, ?)";
@@ -28,6 +27,9 @@ public class LocationRepo : ILocationRepo
         var preparedStatementTractor = _cassandraSession.Prepare(insertTractorCql);
         var preparedStatementCompany = _cassandraSession.Prepare(insertCompanyCql);
 
+        var tasks = new List<Task>();
+
+        
         foreach (var location in locations)
         {
             var weekYear = BucketWeekYear(location.Timestamp);  
@@ -39,7 +41,7 @@ public class LocationRepo : ILocationRepo
                 location.Latitude,
                 location.Longitude
             );
-            batch.Add(boundStatementTractor);
+            tasks.Add(_cassandraSession.ExecuteAsync(boundStatementTractor));
 
             var hourDate = BucketHourDate(location.Timestamp);  
 
@@ -52,11 +54,11 @@ public class LocationRepo : ILocationRepo
                 location.Latitude,
                 location.Longitude
             );
-            batch.Add(boundStatementCompany);
+            tasks.Add(_cassandraSession.ExecuteAsync(boundStatementCompany));
         }
-
-        _cassandraSession.Execute(batch);
-
+        
+        await Task.WhenAll(tasks);
+        
         return "Inserted locations successfully";
     }
 

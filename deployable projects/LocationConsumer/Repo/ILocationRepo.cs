@@ -4,6 +4,6 @@ namespace LocationConsumer.Repo;
 
 public interface ILocationRepo
 {
-    public string BatchInsert(List<Location> locations);
+    public Task<string> BatchInsert(List<Location> locations);
 
 }
