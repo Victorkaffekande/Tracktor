@@ -7,4 +7,7 @@ public class Location
     public DateTime Timestamp { get; set; }
     public double Latitude { get; set; }
     public double Longitude { get; set; }
+    
+    //for devlopment purpose only
+    public string? Info { get; set; }
 }

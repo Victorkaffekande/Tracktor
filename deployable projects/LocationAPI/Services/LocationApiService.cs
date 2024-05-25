@@ -12,25 +12,25 @@ public class LocationApiService : ILocationApiService
         _locationApiRepo = locationApiRepo;
     }
 
-    public List<Location> GetLocationFromCompany(Guid fleetId, DateTime fromTimestamp, DateTime toTimestamp,string hourDate)
+    public List<Location> GetLocationFromFleet(Guid fleetId, DateTime fromTimestamp, DateTime toTimestamp,string hourDate)
     {
-        return _locationApiRepo.GetLocationFromCompany(fleetId, fromTimestamp, toTimestamp, hourDate);
+        return _locationApiRepo.GetLocationFromFleet(fleetId, fromTimestamp, toTimestamp, hourDate);
     }
 
-    public List<Location> GetLocationFromTractor(Guid vehicleId, string weekYear, DateTime fromTimestamp,
+    public List<Location> GetLocationFromVehicle(Guid vehicleId, string weekYear, DateTime fromTimestamp,
         DateTime toTimestamp)
     {
-        return _locationApiRepo.GetLocationFromTractor(vehicleId, weekYear, fromTimestamp, toTimestamp);
+        return _locationApiRepo.GetLocationFromVehicle(vehicleId, weekYear, fromTimestamp, toTimestamp);
     }
 
-    public List<Location> TestTractor()
+    public List<Location> TestVehicle()
     {
-        return _locationApiRepo.TestTractor();
+        return _locationApiRepo.TestVehicle();
     }
     
-    public List<Location> TestCompany()
+    public List<Location> TestFleet()
     {
-        return _locationApiRepo.TestCompany();
+        return _locationApiRepo.TestFleet();
     }
 
 

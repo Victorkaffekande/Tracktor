@@ -21,8 +21,8 @@ public class LocationRepo : ILocationRepo
         //TODO limit the amount of locations getting writing per batch write.
     
         //setting up for batch write into both tables
-        var insertTractorCql = "INSERT INTO Locations_By_Tractor (vehicle_id, week_year, timestamp, latitude, longitude) VALUES (?, ?, ?, ?, ?)";
-        var insertCompanyCql = "INSERT INTO Locations_By_Company (fleet_id, vehicle_id, hour_date, timestamp, latitude, longitude) VALUES (?, ?, ?, ?, ?, ?)";
+        var insertTractorCql = "INSERT INTO Locations_By_Vehicle (vehicle_id, week_year, timestamp, latitude, longitude) VALUES (?, ?, ?, ?, ?)";
+        var insertCompanyCql = "INSERT INTO Locations_By_Fleet (fleet_id, vehicle_id, hour_date, timestamp, latitude, longitude) VALUES (?, ?, ?, ?, ?, ?)";
     
         var preparedStatementTractor = _cassandraSession.Prepare(insertTractorCql);
         var preparedStatementCompany = _cassandraSession.Prepare(insertCompanyCql);

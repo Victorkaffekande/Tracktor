@@ -24,7 +24,7 @@ public class CassandraSessionFactory
        
         // Create table if not exists Locations_By_Tractor
         keyspaceSession.Execute(@"
-    CREATE TABLE IF NOT EXISTS Locations_By_Tractor (
+    CREATE TABLE IF NOT EXISTS Locations_By_Vehicle (
         vehicle_id UUID,
         week_year  varchar,
         timestamp TIMESTAMP,
@@ -35,7 +35,7 @@ public class CassandraSessionFactory
         
         // Create table if not exists Location_By_Company
         keyspaceSession.Execute(@"
-    CREATE TABLE IF NOT EXISTS Locations_By_Company (
+    CREATE TABLE IF NOT EXISTS Locations_By_Fleet (
         fleet_id UUID,
         vehicle_id UUID,
         hour_date varchar,

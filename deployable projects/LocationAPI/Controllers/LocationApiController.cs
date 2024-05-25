@@ -17,35 +17,35 @@ public class LocationApiController : ControllerBase
     
     
     [HttpGet]
-    [Route("LocationFromTractor")]
-    public IActionResult GetLocationFromTractor(Guid vehicleId, string weekYear, DateTime fromTimestamp, DateTime toTimestamp)
+    [Route("LocationFromVehicle")]
+    public IActionResult GetLocationFromVehicle(Guid vehicleId, string weekYear, DateTime fromTimestamp, DateTime toTimestamp)
     {
        
 
-        return Ok(_locationApiService.GetLocationFromTractor(vehicleId,weekYear,fromTimestamp,toTimestamp));
+        return Ok(_locationApiService.GetLocationFromVehicle(vehicleId,weekYear,fromTimestamp,toTimestamp));
     }
     
     [HttpGet]
-    [Route("LocationFromCompany")]
-    public IActionResult GetLocationFromCompany(Guid fleetId, DateTime fromTimestamp, DateTime toTimestamp,string hourDate)
+    [Route("LocationFromFleet")]
+    public IActionResult GetLocationFromFleet(Guid fleetId, DateTime fromTimestamp, DateTime toTimestamp,string hourDate)
     {
        
-        return Ok(_locationApiService.GetLocationFromCompany(fleetId,fromTimestamp,toTimestamp,hourDate ));
+        return Ok(_locationApiService.GetLocationFromFleet(fleetId,fromTimestamp,toTimestamp,hourDate ));
     }
 
     
     
     [HttpGet]
-    [Route("TestCompany")]
-    public IActionResult TestCompany()
+    [Route("TestFleet")]
+    public IActionResult TestFleet()
     {
-        return Ok(_locationApiService.TestCompany());
+        return Ok(_locationApiService.TestFleet());
     }
 
     [HttpGet]
-    [Route("TestTractor")]
-    public IActionResult TestTractor()
+    [Route("TestVehicle")]
+    public IActionResult TestVehicle()
     {
-        return Ok(_locationApiService.TestTractor());
+        return Ok(_locationApiService.TestVehicle());
     }
 }
