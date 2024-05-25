@@ -78,7 +78,8 @@ public class LocationRepo : ILocationRepo
     public string BucketHourDate(DateTime timestamp)
     {
         //examples 11-30-00-2024 ie "hh-dd-mm-yyyy"
-        var hourDate = timestamp.ToString("hh-dd-mm-yyyy");
+        //CHANGING the capital in formating for HH to hh would make it 12formating instead of 24
+        var hourDate = timestamp.ToString("HH-dd-MM-yyyy");
         
         return hourDate;
     }
