@@ -20,7 +20,7 @@ services:
       context: .
       dockerfile: deployable projects/LocationAPI/Dockerfile
     env_file:
-      - deployable projects/LocationApi/.env
+      - deployable projects/LocationAPI/.env
     depends_on:
       cassandra-1:
         condition: service_healthy

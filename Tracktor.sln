@@ -12,7 +12,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharedModels", "shared\Shar
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CassandraFactory", "libaries\CassandraFactory\CassandraFactory.csproj", "{35F05EE8-A99A-4B92-BA01-91D7C1FBEAC8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LocationApi", "deployable projects\LocationApi\LocationApi.csproj", "{FD35E742-FC69-4A84-9E96-D655B77B9C31}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LocationAPI", "deployable projects\LocationAPI\LocationAPI.csproj", "{FD35E742-FC69-4A84-9E96-D655B77B9C31}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
