@@ -21,11 +21,11 @@ public class LocationRepo : ILocationRepo
         //TODO limit the amount of locations getting writing per batch write.
     
         //setting up for batch write into both tables
-        var insertTractorCql = "INSERT INTO Locations_By_Vehicle (vehicle_id, week_year, timestamp, latitude, longitude) VALUES (?, ?, ?, ?, ?)";
-        var insertCompanyCql = "INSERT INTO Locations_By_Fleet (fleet_id, vehicle_id, hour_date, timestamp, latitude, longitude) VALUES (?, ?, ?, ?, ?, ?)";
+        var insertVehicleCql = "INSERT INTO Locations_By_Vehicle (vehicle_id, week_year, timestamp, latitude, longitude) VALUES (?, ?, ?, ?, ?)";
+        var insertFleetCql = "INSERT INTO Locations_By_Fleet (fleet_id, vehicle_id, hour_date, timestamp, latitude, longitude) VALUES (?, ?, ?, ?, ?, ?)";
     
-        var preparedStatementTractor = _cassandraSession.Prepare(insertTractorCql);
-        var preparedStatementCompany = _cassandraSession.Prepare(insertCompanyCql);
+        var preparedStatementVehicle = _cassandraSession.Prepare(insertVehicleCql);
+        var preparedStatementFleet = _cassandraSession.Prepare(insertFleetCql);
 
         var tasks = new List<Task>();
 
@@ -34,19 +34,19 @@ public class LocationRepo : ILocationRepo
         {
             var weekYear = BucketWeekYear(location.Timestamp);  
             
-            var boundStatementTractor = preparedStatementTractor.Bind(
+            var boundStatementVehicle = preparedStatementVehicle.Bind(
                 location.VehicleId,
                 weekYear,
                 location.Timestamp,
                 location.Latitude,
                 location.Longitude
             );
-            tasks.Add(_cassandraSession.ExecuteAsync(boundStatementTractor));
+            tasks.Add(_cassandraSession.ExecuteAsync(boundStatementVehicle));
 
             var hourDate = BucketHourDate(location.Timestamp);  
 
             
-            var boundStatementCompany = preparedStatementCompany.Bind(
+            var boundStatementFleet = preparedStatementFleet.Bind(
                 location.FleetId,
                 location.VehicleId,
                 hourDate,
@@ -54,7 +54,7 @@ public class LocationRepo : ILocationRepo
                 location.Latitude,
                 location.Longitude
             );
-            tasks.Add(_cassandraSession.ExecuteAsync(boundStatementCompany));
+            tasks.Add(_cassandraSession.ExecuteAsync(boundStatementFleet));
         }
         
         await Task.WhenAll(tasks);

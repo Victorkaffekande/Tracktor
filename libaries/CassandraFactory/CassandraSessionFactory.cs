@@ -22,7 +22,7 @@ public class CassandraSessionFactory
         var keyspaceSession = cluster.Connect("gps");
 
        
-        // Create table if not exists Locations_By_Tractor
+        // Create table if not exists Locations_By_Vehicle
         keyspaceSession.Execute(@"
     CREATE TABLE IF NOT EXISTS Locations_By_Vehicle (
         vehicle_id UUID,
@@ -33,7 +33,7 @@ public class CassandraSessionFactory
         PRIMARY KEY ((vehicle_id, week_year), timestamp)
         )");
         
-        // Create table if not exists Location_By_Company
+        // Create table if not exists Location_By_Fleet
         keyspaceSession.Execute(@"
     CREATE TABLE IF NOT EXISTS Locations_By_Fleet (
         fleet_id UUID,
