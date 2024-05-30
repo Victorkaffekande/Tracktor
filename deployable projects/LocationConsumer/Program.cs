@@ -16,12 +16,12 @@ IHost host = Host.CreateDefaultBuilder(args)
         services.AddSingleton(CassandraSessionFactory.CreateCassandraService().Start());
         services.AddSingleton<ILocationRepo, LocationRepo>();
         services.Configure<ConsumerConfig>(hostContext.Configuration.GetSection("Kafka")); 
-        services.AddSingleton<IConsumer<String, CoordinateMessage>>(sp =>
+        services.AddSingleton<IConsumer<String, LocationMessage>>(sp =>
         {
             var config = sp.GetRequiredService<IOptions<ConsumerConfig>>();
 
-            return new ConsumerBuilder<String, CoordinateMessage>(config.Value)
-                .SetValueDeserializer(new JsonDeserializer<CoordinateMessage>().AsSyncOverAsync())
+            return new ConsumerBuilder<String, LocationMessage>(config.Value)
+                .SetValueDeserializer(new JsonDeserializer<LocationMessage>().AsSyncOverAsync())
                 .Build();
         });
         services.AddHostedService<LocationConsumerWorker>();
