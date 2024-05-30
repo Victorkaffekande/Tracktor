@@ -2,6 +2,7 @@
 using Confluent.SchemaRegistry.Serdes;
 using Microsoft.Extensions.Options;
 using Confluent.Kafka.SyncOverAsync;
+using LocationConsumer.Repo;
 using LocationConsumer.Workers;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -12,6 +13,8 @@ DotNetEnv.Env.Load("../../../.env");
 IHost host = Host.CreateDefaultBuilder(args)
     .ConfigureServices((hostContext, services) =>
     {
+        services.AddSingleton(CassandraSessionFactory.CreateCassandraService().Start());
+        services.AddSingleton<ILocationRepo, LocationRepo>();
         services.Configure<ConsumerConfig>(hostContext.Configuration.GetSection("Kafka")); 
         services.AddSingleton<IConsumer<String, CoordinateMessage>>(sp =>
         {

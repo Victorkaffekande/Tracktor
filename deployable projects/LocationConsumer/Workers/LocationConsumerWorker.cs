@@ -1,4 +1,5 @@
 ﻿using Confluent.Kafka;
+using LocationConsumer.Repo;
 using Microsoft.Extensions.Hosting;
 using SharedModels;
 
@@ -8,15 +9,31 @@ public class LocationConsumerWorker : BackgroundService
 {
     private const string LocationsTopicName = "GPS_Locations";
     private readonly IConsumer<String, CoordinateMessage> _consumer;
-
-    public LocationConsumerWorker(IConsumer<String, CoordinateMessage> consumer)
+    private readonly ILocationRepo _repo;
+    public LocationConsumerWorker(IConsumer<String, CoordinateMessage> consumer, ILocationRepo repo)
     {
         _consumer = consumer;
+        _repo = repo;
     }
     
     protected async Task HandleMessage(CoordinateMessage message, CancellationToken cancellationToken)
     {
-        //TODO put message into database
+        //TODO update to fit models
+        var locations = new List<Location>()
+        {
+            new Location()
+            {
+                Timestamp = message.Timestamp,
+                Latitude = message.Coordinate.Latitude,
+                Longitude = message.Coordinate.Longitude,
+                VehicleId = message.VehicleId,
+                FleetId = new Guid("00000000-0000-0000-0000-000000000000")
+            }
+        };
+        _repo.BatchInsert(locations);
+        
+        
+        
         Console.WriteLine(message);
         await Task.CompletedTask;
     }

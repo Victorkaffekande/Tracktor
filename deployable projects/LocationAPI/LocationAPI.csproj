@@ -12,9 +12,7 @@
         <PackageReference Include="Confluent.SchemaRegistry" Version="2.4.0" />
         <PackageReference Include="Confluent.SchemaRegistry.Serdes.Json" Version="2.4.0" />
         <PackageReference Include="DotNetEnv" Version="3.0.0" />
-        <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.15"/>
-        <PackageReference Include="Microsoft.Extensions.Configuration" Version="8.0.0" />
-        <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="8.0.1" />
+        <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.16"/>
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0"/>
     </ItemGroup>
 
@@ -25,6 +23,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\..\libaries\CassandraFactory\CassandraFactory.csproj" />
       <ProjectReference Include="..\..\shared\SharedModels\SharedModels.csproj" />
     </ItemGroup>
 

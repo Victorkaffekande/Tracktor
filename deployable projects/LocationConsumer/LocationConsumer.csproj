@@ -18,6 +18,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <PackageReference Include="CassandraCSharpDriver" Version="3.20.1" />
       <PackageReference Include="Confluent.Kafka" Version="2.4.0" />
       <PackageReference Include="Confluent.SchemaRegistry" Version="2.4.0" />
       <PackageReference Include="Confluent.SchemaRegistry.Serdes.Json" Version="2.4.0" />
@@ -28,6 +29,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\..\libaries\CassandraFactory\CassandraFactory.csproj" />
       <ProjectReference Include="..\..\shared\SharedModels\SharedModels.csproj" />
     </ItemGroup>
 
