@@ -40,9 +40,12 @@ namespace LocationConsumer.Workers
             // Perform batch insert if there are any locations  
             if (locations.Count > 0)  
             {  
-                Console.WriteLine(locations);
-                //await _repo.BatchInsert(locations);  
-                //Console.WriteLine($"Processed batch of {locations.Count} locations.");  
+                foreach (var location in locations)
+                {
+                    Console.WriteLine(location);
+                }
+                await _repo.BatchInsert(locations);  
+                Console.WriteLine($"Processed batch of {locations.Count} locations.");  
             }  
   
             await Task.CompletedTask;  
