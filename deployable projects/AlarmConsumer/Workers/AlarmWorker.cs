@@ -23,19 +23,15 @@ public class AlarmWorker : BackgroundService
     protected async Task HandleMessage(CoordinateMessage message, CancellationToken cancellationToken)
     {
         Console.WriteLine(JsonSerializer.Serialize(message));
-        
+
         var c = message.Coordinate;
         if (c == null) await Task.CompletedTask;
-        
-        
+
         var fences = GetFencesFromId(message.VehicleId.ToString());
-        //get fence from vehicle id
-        //ispoint valid (fence, coodinate)
 
         var valid = GeometryHelper.IsPointValid(fences, c);
 
         Console.WriteLine(valid);
-        
         await Task.CompletedTask;
     }
 
@@ -49,7 +45,9 @@ public class AlarmWorker : BackgroundService
             PropertyNameCaseInsensitive = true
         };
         var list = JsonSerializer.Deserialize<List<GeoFence>>(fencesString, opt);
-        return list ?? new List<GeoFence>(); //if deserialize fails return empty list
+        if (list == null) throw new Exception("Failed to deserialize fence string");
+        
+        return list;
     }
 
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)

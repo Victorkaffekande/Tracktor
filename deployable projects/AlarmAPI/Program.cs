@@ -1,15 +1,15 @@
-using AlarmService.client;
+using AlarmConsumer.client;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddSingleton(RedisClientFactory.CreateClient());
-
+builder.Services.AddControllers();
+// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddControllers();
+builder.Services.AddSingleton(RedisClientFactory.CreateClient());
 
 var app = builder.Build();
 

@@ -1,6 +1,6 @@
 ﻿using StackExchange.Redis;
 
-namespace AlarmService.client;
+namespace AlarmConsumer.client;
 
 public class RedisClient
 {
@@ -22,7 +22,7 @@ public class RedisClient
         var op = ConfigurationOptions.Parse(_hostName);
         op.Password = _password;
         
-        var connectionString = $"{_hostName},password={_password}";
+        //var connectionString = $"{_hostName},password={_password}";
         _redis = ConnectionMultiplexer.Connect(op);
         
     }

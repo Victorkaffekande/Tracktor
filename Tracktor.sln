@@ -4,8 +4,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gateway", "deployable proje
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TractorService", "deployable projects\TractorService\TractorService.csproj", "{E1371C05-BB38-461F-A443-8FA51281CDCC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlarmService", "deployable projects\AlarmService\AlarmService.csproj", "{766E3499-39A6-4504-AA11-B622A45E1897}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LocationConsumer", "deployable projects\LocationConsumer\LocationConsumer.csproj", "{BBC8DD41-4139-4B13-81EA-07E40FBA7496}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharedModels", "shared\SharedModels\SharedModels.csproj", "{E2B9A451-1A63-4D8C-81C4-C1436E938DBB}"
@@ -15,6 +13,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CassandraFactory", "libaries\CassandraFactory\CassandraFactory.csproj", "{35F05EE8-A99A-4B92-BA01-91D7C1FBEAC8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LocationAPI", "deployable projects\LocationAPI\LocationAPI.csproj", "{FD35E742-FC69-4A84-9E96-D655B77B9C31}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlarmAPI", "deployable projects\AlarmAPI\AlarmAPI.csproj", "{D257EF61-58F8-4B26-9AB3-56E5DB92366F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharedClasses", "shared\SharedClasses\SharedClasses.csproj", "{79225D9A-057C-4909-A52A-780669D93F13}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -30,10 +32,6 @@ Global
 		{E1371C05-BB38-461F-A443-8FA51281CDCC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E1371C05-BB38-461F-A443-8FA51281CDCC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E1371C05-BB38-461F-A443-8FA51281CDCC}.Release|Any CPU.Build.0 = Release|Any CPU
-		{766E3499-39A6-4504-AA11-B622A45E1897}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{766E3499-39A6-4504-AA11-B622A45E1897}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{766E3499-39A6-4504-AA11-B622A45E1897}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{766E3499-39A6-4504-AA11-B622A45E1897}.Release|Any CPU.Build.0 = Release|Any CPU
 		{8F412666-4F12-4818-8EA4-E5BE74E40CC9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8F412666-4F12-4818-8EA4-E5BE74E40CC9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8F412666-4F12-4818-8EA4-E5BE74E40CC9}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -59,5 +57,13 @@ Global
 		{4B412839-04E6-478D-BFBF-95BF6211558B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4B412839-04E6-478D-BFBF-95BF6211558B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4B412839-04E6-478D-BFBF-95BF6211558B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D257EF61-58F8-4B26-9AB3-56E5DB92366F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D257EF61-58F8-4B26-9AB3-56E5DB92366F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D257EF61-58F8-4B26-9AB3-56E5DB92366F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D257EF61-58F8-4B26-9AB3-56E5DB92366F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{79225D9A-057C-4909-A52A-780669D93F13}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{79225D9A-057C-4909-A52A-780669D93F13}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{79225D9A-057C-4909-A52A-780669D93F13}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{79225D9A-057C-4909-A52A-780669D93F13}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
