@@ -47,8 +47,6 @@ namespace LocationConsumer.Workers
                 await _repo.BatchInsert(locations);  
                 Console.WriteLine($"Processed batch of {locations.Count} locations.");  
             }  
-  
-            await Task.CompletedTask;  
         }  
   
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)  
