@@ -55,6 +55,8 @@ services:
       interval: 30s
       timeout: 30s
       retries: 5
+    volumes:
+      - Cassandra-1
 
   cassandra-2:
     image: cassandra:latest
@@ -72,6 +74,8 @@ services:
       interval: 30s
       timeout: 30s
       retries: 5
+    volumes:
+      - Cassandra-2
 
   cassandra-3:
     image: cassandra:latest
@@ -89,6 +93,13 @@ services:
       interval: 30s
       timeout: 30s
       retries: 5
+    volumes:
+      - Cassandra-3
 
 networks:
   cassandra: 
+
+volumes:
+  Cassandra-1:
+  Cassandra-2:
+  Cassandra-3:
