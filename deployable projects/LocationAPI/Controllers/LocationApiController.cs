@@ -20,8 +20,6 @@ public class LocationApiController : ControllerBase
     [Route("LocationFromVehicle")]
     public IActionResult GetLocationFromVehicle(Guid vehicleId, string weekYear, DateTime fromTimestamp, DateTime toTimestamp)
     {
-       
-
         return Ok(_locationApiService.GetLocationFromVehicle(vehicleId,weekYear,fromTimestamp,toTimestamp));
     }
     

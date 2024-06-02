@@ -29,13 +29,13 @@ builder.Services.AddSingleton<ISchemaRegistryClient>(sp =>
     return new CachedSchemaRegistryClient(config.Value);
 });
 
-builder.Services.AddSingleton<IProducer<String, CoordinateMessage>>(sp =>
+builder.Services.AddSingleton<IProducer<String, LocationMessage>>(sp =>
 {
     var config = sp.GetRequiredService<IOptions<ProducerConfig>>();
     var schema = sp.GetRequiredService<ISchemaRegistryClient>();
 
-    return new ProducerBuilder<String, CoordinateMessage>(config.Value)
-        .SetValueSerializer(new JsonSerializer<CoordinateMessage>(schema))
+    return new ProducerBuilder<String, LocationMessage>(config.Value)
+        .SetValueSerializer(new JsonSerializer<LocationMessage>(schema))
         .Build();
 });
 
