@@ -1,5 +1,6 @@
 ﻿using System.Text.Json;
 using AlarmConsumer.client;
+using AlarmConsumer.Models;
 using AlarmService.Helper;
 using AlarmService.Schema;
 using Confluent.Kafka;
@@ -11,12 +12,15 @@ namespace AlarmConsumer.Workers;
 public class AlarmWorker : BackgroundService
 {
     private const string LocationsTopicName = "GPS_Locations";
+    private const string AlarmTopicName = "Alarm";
     private readonly IConsumer<String, CoordinateMessage> _consumer;
+    private readonly IProducer<String, AlarmMessage> _producer;
     private readonly RedisClient _redisClient;
 
-    public AlarmWorker(IConsumer<string, CoordinateMessage> consumer)
+    public AlarmWorker(IConsumer<string, CoordinateMessage> consumer, IProducer<string, AlarmMessage> producer)
     {
         _consumer = consumer;
+        _producer = producer;
         _redisClient = RedisClientFactory.CreateClient();
     }
 
@@ -30,6 +34,24 @@ public class AlarmWorker : BackgroundService
         var fences = GetFencesFromId(message.VehicleId.ToString());
 
         var valid = GeometryHelper.IsPointValid(fences, c);
+
+        if (!valid)
+        {
+            var alarmMessage = new Message<String, AlarmMessage>
+            {
+                Key = message.VehicleId.ToString(),
+                Value = new AlarmMessage()
+                {
+                    VehicleId = message.VehicleId,
+                    Longitude = message.Coordinate.Longitude,
+                    Latitude = message.Coordinate.Latitude,
+                    Timestamp = DateTime.Now
+                }
+            };
+            
+            var res = await _producer.ProduceAsync(AlarmTopicName, alarmMessage, cancellationToken);
+            _producer.Flush(cancellationToken);
+        }
 
         Console.WriteLine(valid);
         await Task.CompletedTask;
