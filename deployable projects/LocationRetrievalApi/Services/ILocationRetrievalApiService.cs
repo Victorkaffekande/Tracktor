@@ -1,8 +1,8 @@
 ﻿using SharedModels;
 
-namespace LocationAPI.repo;
+namespace LocationRetrievalApi.Services;
 
-public interface ILocationApiRepo
+public interface ILocationRetrievalApiService
 {
     public List<Location> GetLocationFromFleet(Guid fleetId, DateTime fromTimestamp, DateTime toTimestamp,
         string hourDate);

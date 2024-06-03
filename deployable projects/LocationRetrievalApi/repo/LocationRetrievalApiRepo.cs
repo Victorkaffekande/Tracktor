@@ -1,14 +1,14 @@
-﻿
-using SharedModels;
+﻿using SharedModels;
 using ISession = Cassandra.ISession;
 
-namespace LocationAPI.repo;
 
-public class LocationApiRepo : ILocationApiRepo
+namespace LocationRetrievalApi.repo;
+
+public class LocationRetrievalApiRepo : ILocationRetrievalApiRepo
 {
     private readonly ISession _cassandraSession;
     
-    public LocationApiRepo(ISession cassandraSession)
+    public LocationRetrievalApiRepo(ISession cassandraSession)
     {
         _cassandraSession = cassandraSession;
     }
