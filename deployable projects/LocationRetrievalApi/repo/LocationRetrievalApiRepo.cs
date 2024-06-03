@@ -91,6 +91,7 @@ public class LocationRetrievalApiRepo : ILocationRetrievalApiRepo
         var results = rs.Select(row => new Location
         {
             VehicleId = row.GetValue<Guid>("vehicle_id"),
+            FleetId = row.GetValue<Guid>("fleet_id"),
             Timestamp = row.GetValue<DateTime>("timestamp"),
             Latitude = row.GetValue<double>("latitude"),
             Longitude = row.GetValue<double>("longitude"),

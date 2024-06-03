@@ -1,5 +1,4 @@
-using LocationAPI.repo;
-using LocationAPI.Services;
+
 using LocationRetrievalApi.repo;
 using LocationRetrievalApi.Services;
 
