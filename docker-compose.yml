@@ -1,6 +1,14 @@
 version: '3.8'
 
 services:
+  
+  gateway:
+    build:
+      context: .
+      dockerfile: deployable projects/Gateway/Dockerfile
+    ports:
+      - "5004:80"
+        
   location-consumer:
     build:
       context: .
