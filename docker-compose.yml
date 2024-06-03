@@ -14,7 +14,7 @@ services:
         condition: service_healthy
       cassandra-3:
         condition: service_healthy
-      location-api:
+      location-retrieval-api:
         condition: service_started
     networks:
       - cassandra
@@ -34,6 +34,18 @@ services:
         condition: service_healthy
     ports:
       - "5005:80"
+ 
+  location-retrieval-api:
+    build:
+      context: .
+      dockerfile: deployable projects/LocationRetrievalApi/Dockerfile
+    depends_on:
+      cassandra-1:
+        condition: service_healthy
+      cassandra-2:
+        condition: service_healthy
+    ports:
+      - "5006:80"
     networks:
       - cassandra
 
