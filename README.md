@@ -13,11 +13,11 @@ Overview of important files locations for the Databases for Developers, System I
 Navigation and important files 
 ## Files 
 - libaries/CassandraFactory
-- deployable projects/LocationAPI/repo/LocationApiRepo.cs
+- deployable projects/LocationRetrievalAPI/repo/LocationApiRepo.cs
 - deployable projects/LocationConsumer/Repo/LocationRepo.cs
 - docker-compose.yml
 
-Also find the depenecy injection of the CassandraFactory located in either the LoccationApi or LocationConsumer program.cs file
+Also find the depenecy injection of the CassandraFactory located in either the LoccationRetrievalApi or LocationConsumer program.cs file
 
 # System Integration
 
