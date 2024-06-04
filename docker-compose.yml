@@ -24,6 +24,9 @@ services:
         condition: service_healthy
     ports:
       - '5006:80'
+    networks:
+      - backend_net
+
   
   alarm_consumer:
     build:
