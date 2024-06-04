@@ -1,6 +1,46 @@
 version: '3.8'
 
 services:
+  redis:
+    image: 'redislabs/redisearch:latest'
+    container_name: 'redis'
+    command: bash -c "redis-server --appendonly yes --requirepass mypassword"
+    healthcheck:
+      test: ["CMD-SHELL", "redis-cli -a mypassword ping | grep PONG"]
+      interval: 1s
+      timeout: 3s
+      retries: 5
+    ports:
+      - '6379:6379'
+    volumes:
+      - ./redis-volume:/data
+    networks: 
+      - backend_net
+  
+  alarm_api:
+    build:
+      context: .
+      dockerfile: deployable projects/AlarmAPI/Dockerfile
+    depends_on: 
+      redis:
+        condition: service_healthy
+    ports:
+      - '5006:80'
+    networks:
+      - backend_net
+
+  
+  alarm_consumer:
+    build:
+      context: .
+      dockerfile: deployable projects/AlarmConsumer/Dockerfile
+    env_file:
+      - deployable projects/AlarmConsumer/.env
+    depends_on:
+      redis:
+        condition: service_healthy
+    networks: 
+      - backend_net
   
   gateway:
     build:
@@ -11,7 +51,6 @@ services:
     networks:
       - backend_net
       - client_net
-      
   
   location-consumer:
     build:
@@ -37,9 +76,6 @@ services:
       dockerfile: deployable projects/LocationAPI/Dockerfile
     env_file:
       - deployable projects/LocationAPI/.env
-    depends_on:
-      location-consumer:
-        condition: service_started
     ports:
       - "5005:80"
  

@@ -47,6 +47,18 @@
       ],
       "UpstreamPathTemplate": "/LocationRetrievalApi/TestVehicle",
       "UpstreamHttpMethod": [ "Get" ]
+    },
+    {
+      "DownstreamPathTemplate": "/Alarm",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "alarm_api",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/Alarm",
+      "UpstreamHttpMethod": [ "Get", "Post", "Delete" ]
     }
   ]
 }
