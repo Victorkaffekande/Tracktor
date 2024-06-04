@@ -5,7 +5,7 @@
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "LocationRetrievalApi",
+          "Host": "location-retrieval-api",
           "Port": 80
         }
       ],
@@ -17,7 +17,7 @@
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "LocationRetrievalApi",
+          "Host": "location-retrieval-api",
           "Port": 80
         }
       ],
@@ -29,7 +29,7 @@
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "LocationRetrievalApi",
+          "Host": "location-retrieval-api",
           "Port": 80
         }
       ],
@@ -41,11 +41,11 @@
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "LocationRetrievalApi",
+          "Host": "location-retrieval-api",
           "Port": 80
         }
       ],
-      "UpstreamPathTemplate": "/LocationApi/TestVehicle",
+      "UpstreamPathTemplate": "/LocationRetrievalApi/TestVehicle",
       "UpstreamHttpMethod": [ "Get" ]
     }
   ]

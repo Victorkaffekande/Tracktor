@@ -8,7 +8,11 @@ services:
       dockerfile: deployable projects/Gateway/Dockerfile
     ports:
       - "5004:80"
-        
+    networks:
+      - backend_net
+      - client_net
+      
+  
   location-consumer:
     build:
       context: .
@@ -34,12 +38,8 @@ services:
     env_file:
       - deployable projects/LocationAPI/.env
     depends_on:
-      cassandra-1:
-        condition: service_healthy
-      cassandra-2:
-        condition: service_healthy
-      cassandra-3:
-        condition: service_healthy
+      location-consumer:
+        condition: service_started
     ports:
       - "5005:80"
  
@@ -52,10 +52,9 @@ services:
         condition: service_healthy
       cassandra-2:
         condition: service_healthy
-    ports:
-      - "5006:80"
     networks:
       - cassandra
+      - backend_net
 
   cassandra-1:
     image: cassandra:latest
@@ -111,5 +110,10 @@ services:
       retries: 5
 
 networks:
+  backend_net:
+    external: false
+    driver: bridge
+  client_net:
+    external: true
   cassandra:
     name: cassandra

@@ -5,11 +5,11 @@ namespace LocationRetrievalApi.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class LocationRetrievalApi : ControllerBase
+public class LocationRetrievalApiController : ControllerBase
 {
     private readonly ILocationRetrievalApiService _locationRetrievalApiService;
 
-    public LocationRetrievalApi(ILocationRetrievalApiService locationRetrievalApiService)
+    public LocationRetrievalApiController(ILocationRetrievalApiService locationRetrievalApiService)
     {
         _locationRetrievalApiService = locationRetrievalApiService;
     }
