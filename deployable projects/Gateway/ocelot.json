@@ -1,0 +1,52 @@
+{
+  "Routes": [
+    {
+      "DownstreamPathTemplate": "/LocationRetrievalApi/LocationFromVehicle",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "location-retrieval-api",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/LocationRetrievalApi/LocationFromVehicle",
+      "UpstreamHttpMethod": [ "Get" ]
+    },
+    {
+      "DownstreamPathTemplate": "/LocationRetrievalApi/LocationFromFleet",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "location-retrieval-api",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/LocationRetrievalApi/LocationFromFleet",
+      "UpstreamHttpMethod": [ "Get" ]
+    },
+    {
+      "DownstreamPathTemplate": "/LocationRetrievalApi/TestFleet",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "location-retrieval-api",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/LocationRetrievalApi/TestFleet",
+      "UpstreamHttpMethod": [ "Get" ]
+    },
+    {
+      "DownstreamPathTemplate": "/LocationRetrievalApi/TestVehicle",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "location-retrieval-api",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/LocationRetrievalApi/TestVehicle",
+      "UpstreamHttpMethod": [ "Get" ]
+    }
+  ]
+}
