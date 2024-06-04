@@ -18,6 +18,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlarmAPI", "deployable proj
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharedClasses", "shared\SharedClasses\SharedClasses.csproj", "{79225D9A-057C-4909-A52A-780669D93F13}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LocationRetrievalApi", "deployable projects\LocationRetrievalApi\LocationRetrievalApi.csproj", "{3188CBD3-8963-4BFB-89B2-092DBE24B8AF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -65,5 +67,9 @@ Global
 		{79225D9A-057C-4909-A52A-780669D93F13}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{79225D9A-057C-4909-A52A-780669D93F13}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{79225D9A-057C-4909-A52A-780669D93F13}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3188CBD3-8963-4BFB-89B2-092DBE24B8AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3188CBD3-8963-4BFB-89B2-092DBE24B8AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3188CBD3-8963-4BFB-89B2-092DBE24B8AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3188CBD3-8963-4BFB-89B2-092DBE24B8AF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

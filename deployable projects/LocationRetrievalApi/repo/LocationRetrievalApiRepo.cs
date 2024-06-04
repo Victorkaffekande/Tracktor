@@ -1,14 +1,14 @@
-﻿
-using SharedModels;
+﻿using SharedModels;
 using ISession = Cassandra.ISession;
 
-namespace LocationAPI.repo;
 
-public class LocationApiRepo : ILocationApiRepo
+namespace LocationRetrievalApi.repo;
+
+public class LocationRetrievalApiRepo : ILocationRetrievalApiRepo
 {
     private readonly ISession _cassandraSession;
     
-    public LocationApiRepo(ISession cassandraSession)
+    public LocationRetrievalApiRepo(ISession cassandraSession)
     {
         _cassandraSession = cassandraSession;
     }
@@ -91,6 +91,7 @@ public class LocationApiRepo : ILocationApiRepo
         var results = rs.Select(row => new Location
         {
             VehicleId = row.GetValue<Guid>("vehicle_id"),
+            FleetId = row.GetValue<Guid>("fleet_id"),
             Timestamp = row.GetValue<DateTime>("timestamp"),
             Latitude = row.GetValue<double>("latitude"),
             Longitude = row.GetValue<double>("longitude"),

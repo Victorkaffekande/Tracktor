@@ -1,19 +1,21 @@
-using Ocelot.DependencyInjection;
-using Ocelot.Middleware;
+
+using LocationRetrievalApi.repo;
+using LocationRetrievalApi.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Configuration.AddJsonFile("ocelot.json");
-builder.Services.AddOcelot(builder.Configuration);
 
 builder.Services.AddControllers();
-
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddSingleton(CassandraSessionFactory.CreateCassandraService().Start());
+builder.Services.AddSingleton<ILocationRetrievalApiRepo, LocationRetrievalApiRepo>();
+builder.Services.AddSingleton<ILocationRetrievalApiService, LocationRetrievalApiService>();
 
 var app = builder.Build();
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -21,7 +23,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-app.UseOcelot().Wait();
+
 
 app.MapControllers();
 

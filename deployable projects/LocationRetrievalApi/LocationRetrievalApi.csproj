@@ -8,8 +8,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.15"/>
-        <PackageReference Include="Ocelot" Version="23.2.2" />
+        <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.16"/>
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0"/>
     </ItemGroup>
 
@@ -17,6 +16,11 @@
       <Content Include="..\..\.dockerignore">
         <Link>.dockerignore</Link>
       </Content>
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\libaries\CassandraFactory\CassandraFactory.csproj" />
+      <ProjectReference Include="..\..\shared\SharedModels\SharedModels.csproj" />
     </ItemGroup>
 
 </Project>

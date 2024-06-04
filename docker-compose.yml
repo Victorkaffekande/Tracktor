@@ -1,4 +1,5 @@
 version: '3.8'
+
 services:
   redis:
     image: 'redislabs/redisearch:latest'
@@ -32,6 +33,17 @@ services:
       redis:
         condition: service_healthy
         
+  
+  gateway:
+    build:
+      context: .
+      dockerfile: deployable projects/Gateway/Dockerfile
+    ports:
+      - "5004:80"
+    networks:
+      - backend_net
+      - client_net
+  
   location-consumer:
     build:
       context: .
@@ -45,7 +57,7 @@ services:
         condition: service_healthy
       cassandra-3:
         condition: service_healthy
-      location-api:
+      location-retrieval-api:
         condition: service_started
     networks:
       - cassandra
@@ -56,6 +68,13 @@ services:
       dockerfile: deployable projects/LocationAPI/Dockerfile
     env_file:
       - deployable projects/LocationAPI/.env
+    ports:
+      - "5005:80"
+ 
+  location-retrieval-api:
+    build:
+      context: .
+      dockerfile: deployable projects/LocationRetrievalApi/Dockerfile
     depends_on:
       cassandra-1:
         condition: service_healthy
@@ -63,10 +82,9 @@ services:
         condition: service_healthy
       cassandra-3:
         condition: service_healthy
-    ports:
-      - "5005:80"
     networks:
       - cassandra
+      - backend_net
 
   cassandra-1:
     image: cassandra:latest
@@ -122,4 +140,10 @@ services:
       retries: 5
 
 networks:
-  cassandra: 
+  backend_net:
+    external: false
+    driver: bridge
+  client_net:
+    external: true
+  cassandra:
+    name: cassandra
