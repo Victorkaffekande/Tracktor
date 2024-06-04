@@ -14,6 +14,8 @@ services:
       - '6379:6379'
     volumes:
       - ./redis-volume:/data
+    networks: 
+      - backend_net
   
   alarm_api:
     build:
@@ -32,10 +34,13 @@ services:
     build:
       context: .
       dockerfile: deployable projects/AlarmConsumer/Dockerfile
+    env_file:
+      - deployable projects/AlarmConsumer/.env
     depends_on:
       redis:
         condition: service_healthy
-        
+    networks: 
+      - backend_net
   
   gateway:
     build:
@@ -82,8 +87,6 @@ services:
       cassandra-1:
         condition: service_healthy
       cassandra-2:
-        condition: service_healthy
-      cassandra-3:
         condition: service_healthy
     networks:
       - cassandra

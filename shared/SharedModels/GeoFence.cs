@@ -1,6 +1,5 @@
 ﻿using SharedModels;
 
-namespace AlarmService.Schema;
 
 public class GeoFence
 {

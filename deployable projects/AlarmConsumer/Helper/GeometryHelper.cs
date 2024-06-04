@@ -1,10 +1,7 @@
-﻿using System.Text.Json;
-using AlarmConsumer.client;
-using AlarmConsumer.Models;
-using AlarmService.Schema;
+﻿
 using SharedModels;
 
-namespace AlarmService.Helper;
+namespace AlarmConsumer.Helper;
 
 public class GeometryHelper
 {

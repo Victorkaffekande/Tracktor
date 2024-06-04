@@ -13,6 +13,7 @@ public class AlarmController : ControllerBase
     public AlarmController(RedisClient redisClient)
     {
         _redisClient = redisClient;
+        _redisClient.Connect();
     }
     
     

@@ -1,4 +1,5 @@
-﻿namespace AlarmConsumer.Models;
+﻿
+namespace SharedModels;
 
 public class Coordinate
 {

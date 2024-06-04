@@ -1,7 +1,7 @@
 ﻿using System.Text.Json;
 using AlarmConsumer.client;
+using AlarmConsumer.Helper;
 using AlarmConsumer.Models;
-using AlarmService.Helper;
 using AlarmService.Schema;
 using Confluent.Kafka;
 using Microsoft.Extensions.Hosting;
@@ -22,6 +22,7 @@ public class AlarmWorker : BackgroundService
         _consumer = consumer;
         _producer = producer;
         _redisClient = RedisClientFactory.CreateClient();
+        _redisClient.Connect();
     }
 
     protected async Task HandleMessage(LocationMessage message, CancellationToken cancellationToken)
@@ -36,6 +37,10 @@ public class AlarmWorker : BackgroundService
 
         var fences = GetFencesFromId(message.VehicleId.ToString());
 
+        if (fences.Count == 0)
+        {
+            await Task.CompletedTask;
+        }
         var valid = GeometryHelper.IsPointValid(fences, c);
 
         if (!valid)

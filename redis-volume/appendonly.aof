@@ -99,3 +99,15 @@ $3
 222
 $79
 [{"a":{"X":0,"Y":0},"b":{"X":50,"Y":0},"c":{"X":50,"Y":50},"d":{"X":0,"Y":50}}]
+*2
+$6
+SELECT
+$1
+0
+*3
+$3
+SET
+$36
+1d984edd-d3ad-4526-bd35-9ae7f59e6ef4
+$139
+[{"a":{"Longitude":0,"Latitude":0},"b":{"Longitude":50,"Latitude":0},"c":{"Longitude":50,"Latitude":50},"d":{"Longitude":0,"Latitude":50}}]
