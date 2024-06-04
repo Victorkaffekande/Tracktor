@@ -13,23 +13,26 @@ public class AlarmWorker : BackgroundService
 {
     private const string LocationsTopicName = "GPS_Locations";
     private const string AlarmTopicName = "Alarm";
-    private readonly IConsumer<String, CoordinateMessage> _consumer;
+    private readonly IConsumer<String, LocationMessage> _consumer;
     private readonly IProducer<String, AlarmMessage> _producer;
     private readonly RedisClient _redisClient;
 
-    public AlarmWorker(IConsumer<string, CoordinateMessage> consumer, IProducer<string, AlarmMessage> producer)
+    public AlarmWorker(IConsumer<string, LocationMessage> consumer, IProducer<string, AlarmMessage> producer)
     {
         _consumer = consumer;
         _producer = producer;
         _redisClient = RedisClientFactory.CreateClient();
     }
 
-    protected async Task HandleMessage(CoordinateMessage message, CancellationToken cancellationToken)
+    protected async Task HandleMessage(LocationMessage message, CancellationToken cancellationToken)
     {
         Console.WriteLine(JsonSerializer.Serialize(message));
 
-        var c = message.Coordinate;
-        if (c == null) await Task.CompletedTask;
+        var c = new Coordinate()
+        {
+            Longitude = message.Longitude,
+            Latitude = message.Latitude
+        };
 
         var fences = GetFencesFromId(message.VehicleId.ToString());
 
@@ -43,8 +46,8 @@ public class AlarmWorker : BackgroundService
                 Value = new AlarmMessage()
                 {
                     VehicleId = message.VehicleId,
-                    Longitude = message.Coordinate.Longitude,
-                    Latitude = message.Coordinate.Latitude,
+                    Longitude = message.Longitude,
+                    Latitude = message.Latitude,
                     Timestamp = DateTime.Now
                 }
             };
@@ -52,8 +55,6 @@ public class AlarmWorker : BackgroundService
             var res = await _producer.ProduceAsync(AlarmTopicName, alarmMessage, cancellationToken);
             _producer.Flush(cancellationToken);
         }
-
-        Console.WriteLine(valid);
         await Task.CompletedTask;
     }
 
@@ -80,8 +81,6 @@ public class AlarmWorker : BackgroundService
             var result = _consumer.Consume(stoppingToken);
             await HandleMessage(result.Message.Value, stoppingToken);
         }
-
         _consumer.Close();
-        await Task.Delay(1000);
     }
 }

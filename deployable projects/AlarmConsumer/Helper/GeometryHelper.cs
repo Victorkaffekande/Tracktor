@@ -1,5 +1,6 @@
 ﻿using System.Text.Json;
 using AlarmConsumer.client;
+using AlarmConsumer.Models;
 using AlarmService.Schema;
 using SharedModels;
 
