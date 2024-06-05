@@ -23,8 +23,7 @@ namespace LocationConsumer.Workers
         private async Task HandleMessages(IEnumerable<Message<string, LocationMessage>> messages, CancellationToken cancellationToken)  
         {  
             var locations = new List<Location>();  
-  
-            // Collect messages into the list  
+            
             foreach (var message in messages)  
             {  
                 locations.Add(new Location()  
@@ -36,15 +35,10 @@ namespace LocationConsumer.Workers
                     FleetId = message.Value.FleetId  
                 });  
             }  
-  
-            // Perform batch insert if there are any locations  
-            if (locations.Count > 0)  
-            {  
-                foreach (var location in locations)
-                {
-                    Console.WriteLine(location);
-                }
-                await _repo.BatchInsert(locations);  
+            
+            if (locations.Count > 0)
+            {
+                await _repo.BulkInsert(locations);
                 Console.WriteLine($"Processed batch of {locations.Count} locations.");  
             }  
         }  
@@ -68,8 +62,7 @@ namespace LocationConsumer.Workers
                             messages.Add(result.Message);
                         }  
                     }  
-  
-                    // Process the batch of messages  
+
                     if (messages.Count > 0)  
                     {  
                         await HandleMessages(messages, stoppingToken);  
