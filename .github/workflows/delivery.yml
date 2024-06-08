@@ -27,7 +27,7 @@ jobs:
       - name: Build and push Gateway
         uses: docker/build-push-action@v4
         with:
-          context: Tracktor/
+          context: .
           file: deployable projects/Gateway/Dockerfile
           push: true
           tags: magnusovergaard/gateway:latest
@@ -47,7 +47,7 @@ jobs:
       - name: Build and push AlarmAPI
         uses: docker/build-push-action@v4
         with:
-          context: Tracktor/
+          context: .
           file: deployable projects/AlarmAPI/Dockerfile
           push: true
           tags: magnusovergaard/alarm-api:latest
@@ -67,7 +67,7 @@ jobs:
       - name: Build and push AlarmConsumer
         uses: docker/build-push-action@v4
         with:
-          context: Tracktor/
+          context: .
           file: Tracktor/deployable projects/AlarmConsumer/Dockerfile
           push: true
           tags: magnusovergaard/alarm_consumer:latest
@@ -87,7 +87,7 @@ jobs:
       - name: Build and push LocationConsumer
         uses: docker/build-push-action@v4
         with:
-          context: Tracktor/
+          context: .
           file: deployable projects/LocationConsumer/Dockerfile
           push: true
           tags: magnusovergaard/location-consumer:latest
@@ -107,7 +107,7 @@ jobs:
       - name: Build and push LocationApi
         uses: docker/build-push-action@v4
         with:
-          context: Tracktor/
+          context: .
           file: deployable projects/LocationApi/Dockerfile
           push: true
           tags: magnusovergaard/location-api:latest
@@ -127,7 +127,7 @@ jobs:
       - name: Build and push LocationRetrievalApi
         uses: docker/build-push-action@v4
         with:
-          context: Tracktor/
+          context: .
           file: deployable projects/LocationRetrievalApi/Dockerfile
           push: true
           tags: magnusovergaard/location-retrieval-api:latest
