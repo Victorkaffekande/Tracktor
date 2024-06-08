@@ -104,11 +104,11 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
        
-      - name: Build and push LocationApi
+      - name: Build and push LocationAPI
         uses: docker/build-push-action@v4
         with:
           context: .
-          file: deployable projects/LocationApi/Dockerfile
+          file: deployable projects/LocationAPI/Dockerfile
           push: true
           tags: magnusovergaard/location-api:latest
           
