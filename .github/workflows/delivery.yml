@@ -12,6 +12,14 @@ on:
         default: 'warning'
 
 jobs:
+  get-last-version-gateway:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Retrieve last image version for Gateway
+        id: get_version_gateway
+        run: |
+          last_version_gateway=$(curl -s https://registry.hub.docker.com/v2/repositories/magnusovergaard/gateway/tags/?page_size=1 | jq -r '.results[0].name' | cut -d'-' -f2)
+          echo "::set-output name=last_version_gateway::$last_version_gateway"
   build-and-push-gateway:
     runs-on: ubuntu-latest
     steps:
@@ -30,8 +38,15 @@ jobs:
           context: .
           file: deployable projects/Gateway/Dockerfile
           push: true
-          tags: magnusovergaard/gateway:1
-          
+          tags: magnusovergaard/gateway:${{ steps.get_version_gateway.outputs.last_version_gateway + 1 }}
+  get-last-version-alarm-api:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Retrieve last image version for AlarmApi
+        id: get_version_alarm_api
+        run: |
+          last_version_alarm_api=$(curl -s https://registry.hub.docker.com/v2/repositories/magnusovergaard/alarm-api/tags/?page_size=1 | jq -r '.results[0].name' | cut -d'-' -f2)
+          echo "::set-output name=last_version_alarm_api::$last_version_alarm_api"        
   build-and-push-alarm_api:
     runs-on: ubuntu-latest
     steps:
@@ -50,8 +65,15 @@ jobs:
           context: .
           file: deployable projects/AlarmAPI/Dockerfile
           push: true
-          tags: magnusovergaard/alarm-api:1
-          
+          tags: magnusovergaard/alarm-api:${{ steps.get_version_alarm_api.outputs.last_version_alarm_api + 1 }}
+  get-last-version-alarm-consumer:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Retrieve last image version for AlarmConsumer
+        id: get_version_alarm_consumer
+        run: |
+          last_version_alarm_consumer=$(curl -s https://registry.hub.docker.com/v2/repositories/magnusovergaard/alarm_consumer/tags/?page_size=1 | jq -r '.results[0].name' | cut -d'-' -f2)
+          echo "::set-output name=last_version_alarm_consumer::$last_version_alarm_consumer"        
   build-and-push-alarm_consumer:
     runs-on: ubuntu-latest
     steps:
@@ -70,8 +92,15 @@ jobs:
           context: .
           file: deployable projects/AlarmConsumer/Dockerfile
           push: true
-          tags: magnusovergaard/alarm_consumer:1
-          
+          tags: magnusovergaard/alarm_consumer:${{ steps.get_version_alarm_consumer.outputs.last_version_alarm_consumer + 1 }}
+  get-last-version-location-consumer:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Retrieve last image version for LocationConsumer
+        id: get_version_location_consumer
+        run: |
+          last_version_location_consumer=$(curl -s https://registry.hub.docker.com/v2/repositories/magnusovergaard/location-consumer/tags/?page_size=1 | jq -r '.results[0].name' | cut -d'-' -f2)
+          echo "::set-output name=last_version_location_consumer::$last_version_location_consumer"        
   build-and-push-location-consumer:
     runs-on: ubuntu-latest
     steps:
@@ -90,8 +119,15 @@ jobs:
           context: .
           file: deployable projects/LocationConsumer/Dockerfile
           push: true
-          tags: magnusovergaard/location-consumer:1
-          
+          tags: magnusovergaard/location-consumer:${{ steps.get_version_location_consumer.outputs.last_version_location_consumer + 1 }}
+  get-last-version-location-api:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Retrieve last image version for LocationAPI
+        id: get_version_location_api
+        run: |
+          last_version_location_api=$(curl -s https://registry.hub.docker.com/v2/repositories/magnusovergaard/location-api/tags/?page_size=1 | jq -r '.results[0].name' | cut -d'-' -f2)
+          echo "::set-output name=last_version_location_api::$last_version_location_api"        
   build-and-push-location-api:
     runs-on: ubuntu-latest
     steps:
@@ -110,8 +146,15 @@ jobs:
           context: .
           file: deployable projects/LocationAPI/Dockerfile
           push: true
-          tags: magnusovergaard/location-api:1
-          
+          tags: magnusovergaard/location-api:${{ steps.get_version_location_api.outputs.last_version_location_api + 1 }}
+  get-last-version-location-retrieval-api:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Retrieve last image version for LocationRetrievalAPI
+        id: get_version_location_retrieval_api
+        run: |
+          last_version_location_retrieval_api=$(curl -s https://registry.hub.docker.com/v2/repositories/magnusovergaard/location-retrieval-api/tags/?page_size=1 | jq -r '.results[0].name' | cut -d'-' -f2)
+          echo "::set-output name=last_version_location_retrieval_api::$last_version_location_retrieval_api"        
   build-and-push-location-retrieval-api:
     runs-on: ubuntu-latest
     steps:
@@ -130,4 +173,4 @@ jobs:
           context: .
           file: deployable projects/LocationRetrievalApi/Dockerfile
           push: true
-          tags: magnusovergaard/location-retrieval-api:1
+          tags: magnusovergaard/location-retrieval-api:${{ steps.get_version_location_retrieval_api.outputs.last_version_location_retrieval_api + 1 }}
