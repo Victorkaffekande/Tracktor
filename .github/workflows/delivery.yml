@@ -30,7 +30,7 @@ jobs:
           context: .
           file: deployable projects/Gateway/Dockerfile
           push: true
-          tags: magnusovergaard/gateway:latest, magnusovergaard/gateway:${{ steps.get_version_gateway.outputs.LAST_VERSION + 1 }}
+          tags: magnusovergaard/gateway:latest
           
   build-and-push-alarm_api:
     runs-on: ubuntu-latest
