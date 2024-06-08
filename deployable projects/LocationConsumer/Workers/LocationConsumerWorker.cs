@@ -20,7 +20,7 @@ namespace LocationConsumer.Workers
             _repo = repo;  
         }  
   
-        private async Task HandleMessages(IEnumerable<Message<string, LocationMessage>> messages, CancellationToken cancellationToken)  
+        private async Task HandleMessages(IEnumerable<Message<string, LocationMessage>> messages)  
         {  
             var locations = new List<Location>();  
             
@@ -35,7 +35,6 @@ namespace LocationConsumer.Workers
                     FleetId = message.Value.FleetId  
                 });  
             }  
-            
             if (locations.Count > 0)
             {
                 await _repo.BulkInsert(locations);
@@ -46,7 +45,6 @@ namespace LocationConsumer.Workers
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)  
         {  
             _consumer.Subscribe(LocationsTopicName);  
-  
             try  
             {  
                 while (!stoppingToken.IsCancellationRequested)  
@@ -65,7 +63,7 @@ namespace LocationConsumer.Workers
 
                     if (messages.Count > 0)  
                     {  
-                        await HandleMessages(messages, stoppingToken);  
+                        await HandleMessages(messages);  
                     }  
                 }  
             }  
