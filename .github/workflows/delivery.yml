@@ -12,14 +12,6 @@ on:
         default: 'warning'
 
 jobs:
-  get-last-version-gateway:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Retrieve last image version for Gateway
-        id: get_version_gateway
-        run: |
-          LAST_VERSION=$(curl -s https://registry.hub.docker.com/v2/repositories/magnusovergaard/gateway/tags/?page_size=1 | jq -r '.results[0].name' | cut -d'-' -f2)
-          echo "::set-output name=LAST_VERSION::$LAST_VERSION"
   build-and-push-gateway:
     runs-on: ubuntu-latest
     steps:
@@ -38,7 +30,7 @@ jobs:
           context: .
           file: deployable projects/Gateway/Dockerfile
           push: true
-          tags: magnusovergaard/gateway:latest, magnusovergaard/gateway:${{ steps.get_version_gateway.outputs.LAST_VERSION + 1 }}
+          tags: magnusovergaard/gateway:1
           
   build-and-push-alarm_api:
     runs-on: ubuntu-latest
@@ -58,7 +50,7 @@ jobs:
           context: .
           file: deployable projects/AlarmAPI/Dockerfile
           push: true
-          tags: magnusovergaard/alarm-api:latest
+          tags: magnusovergaard/alarm-api:1
           
   build-and-push-alarm_consumer:
     runs-on: ubuntu-latest
@@ -78,7 +70,7 @@ jobs:
           context: .
           file: deployable projects/AlarmConsumer/Dockerfile
           push: true
-          tags: magnusovergaard/alarm_consumer:latest
+          tags: magnusovergaard/alarm_consumer:1
           
   build-and-push-location-consumer:
     runs-on: ubuntu-latest
@@ -98,7 +90,7 @@ jobs:
           context: .
           file: deployable projects/LocationConsumer/Dockerfile
           push: true
-          tags: magnusovergaard/location-consumer:latest
+          tags: magnusovergaard/location-consumer:1
           
   build-and-push-location-api:
     runs-on: ubuntu-latest
@@ -118,7 +110,7 @@ jobs:
           context: .
           file: deployable projects/LocationAPI/Dockerfile
           push: true
-          tags: magnusovergaard/location-api:latest
+          tags: magnusovergaard/location-api:1
           
   build-and-push-location-retrieval-api:
     runs-on: ubuntu-latest
@@ -138,4 +130,4 @@ jobs:
           context: .
           file: deployable projects/LocationRetrievalApi/Dockerfile
           push: true
-          tags: magnusovergaard/location-retrieval-api:latest
+          tags: magnusovergaard/location-retrieval-api:1
