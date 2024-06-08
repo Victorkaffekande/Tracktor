@@ -13,27 +13,25 @@ public class LocationRepo : ILocationRepo
     {
         _cassandraSession = cassandraSession;
     }
-    
-    
-    public async Task<string> BatchInsert(List<Location> locations)
+
+    public async Task BulkInsert(List<Location> locations)
     {
-        //doesnt adjust for amount of inserts into the database.
-        //TODO limit the amount of locations getting writing per batch write.
-    
-        //setting up for batch write into both tables
+        var insertVehicleTask = BulkWriteLocationsByVehicle(locations);  
+        var insertFleetTask = BulkWriteLocationsByFleet(locations);  
+  
+        await Task.WhenAll(insertVehicleTask, insertFleetTask);  
+    }
+
+    public async Task BulkWriteLocationsByVehicle(List<Location> locations)
+    {
         var insertVehicleCql = "INSERT INTO Locations_By_Vehicle (vehicle_id, week_year, timestamp, latitude, longitude) VALUES (?, ?, ?, ?, ?)";
-        var insertFleetCql = "INSERT INTO Locations_By_Fleet (fleet_id, vehicle_id, hour_date, timestamp, latitude, longitude) VALUES (?, ?, ?, ?, ?, ?)";
-    
         var preparedStatementVehicle = _cassandraSession.Prepare(insertVehicleCql);
-        var preparedStatementFleet = _cassandraSession.Prepare(insertFleetCql);
-
+        
         var tasks = new List<Task>();
-
         
         foreach (var location in locations)
         {
             var weekYear = BucketWeekYear(location.Timestamp);  
-            
             var boundStatementVehicle = preparedStatementVehicle.Bind(
                 location.VehicleId,
                 weekYear,
@@ -42,10 +40,20 @@ public class LocationRepo : ILocationRepo
                 location.Longitude
             );
             tasks.Add(_cassandraSession.ExecuteAsync(boundStatementVehicle));
-
+        }
+        await Task.WhenAll(tasks);
+    }
+    
+    public async Task BulkWriteLocationsByFleet(List<Location> locations)
+    {
+        var insertFleetCql =
+            "INSERT INTO Locations_By_Fleet (fleet_id, vehicle_id, hour_date, timestamp, latitude, longitude) VALUES (?, ?, ?, ?, ?, ?)";
+        var preparedStatementFleet = _cassandraSession.Prepare(insertFleetCql);        
+        var tasks = new List<Task>();
+        
+        foreach (var location in locations)
+        {
             var hourDate = BucketHourDate(location.Timestamp);  
-
-            
             var boundStatementFleet = preparedStatementFleet.Bind(
                 location.FleetId,
                 location.VehicleId,
@@ -56,10 +64,7 @@ public class LocationRepo : ILocationRepo
             );
             tasks.Add(_cassandraSession.ExecuteAsync(boundStatementFleet));
         }
-        
         await Task.WhenAll(tasks);
-        
-        return "Inserted locations successfully";
     }
 
     //follows the rules of ISO 8601 
