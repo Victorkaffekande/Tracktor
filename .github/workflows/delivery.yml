@@ -84,7 +84,7 @@ jobs:
           context: .
           file: deployable projects/AlarmAPI/Dockerfile
           push: true
-          tags: ${{ needs.get-version-gateway.outputs.tag }}
+          tags: ${{ needs.get-version-alarm-api.outputs.tag }}
   
   get-version-alarm-consumer:
     runs-on: ubuntu-latest
