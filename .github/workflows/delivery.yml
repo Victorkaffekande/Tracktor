@@ -2,7 +2,7 @@
 
 on:
   push:
-    branches: [ main ]
+    branches: [ continuous-delivery ]
     
   workflow_dispatch:
     inputs:
