@@ -28,7 +28,7 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           context: Tracktor/
-          file: Tracktor/deployable projects/Gateway/Dockerfile
+          file: deployable projects/Gateway/Dockerfile
           push: true
           tags: magnusovergaard/gateway:latest
           
@@ -48,7 +48,7 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           context: Tracktor/
-          file: Tracktor/deployable projects/AlarmAPI/Dockerfile
+          file: deployable projects/AlarmAPI/Dockerfile
           push: true
           tags: magnusovergaard/alarm-api:latest
           
@@ -88,7 +88,7 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           context: Tracktor/
-          file: Tracktor/deployable projects/LocationConsumer/Dockerfile
+          file: deployable projects/LocationConsumer/Dockerfile
           push: true
           tags: magnusovergaard/location-consumer:latest
           
@@ -108,7 +108,7 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           context: Tracktor/
-          file: Tracktor/deployable projects/LocationApi/Dockerfile
+          file: deployable projects/LocationApi/Dockerfile
           push: true
           tags: magnusovergaard/location-api:latest
           
@@ -128,6 +128,6 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           context: Tracktor/
-          file: Tracktor/deployable projects/LocationRetrievalApi/Dockerfile
+          file: deployable projects/LocationRetrievalApi/Dockerfile
           push: true
           tags: magnusovergaard/location-retrieval-api:latest
