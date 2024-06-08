@@ -1,0 +1,134 @@
+﻿name: delivery
+
+on:
+  push:
+    branches: [ main ]
+    
+  workflow_dispatch:
+    inputs:
+      logLevel:
+        description: 'Log level'
+        required: true
+        default: 'warning'
+
+jobs:
+  build-and-push-gateway:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout repo
+        uses: actions/checkout@v3
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build and push Gateway
+        uses: docker/build-push-action@v4
+        with:
+          context: Tracktor/
+          file: Tracktor/deployable projects/Gateway/Dockerfile
+          push: true
+          tags: magnusovergaard/gateway:latest
+          
+  build-and-push-alarm_api:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout repo
+        uses: actions/checkout@v3
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}    
+          
+      - name: Build and push AlarmAPI
+        uses: docker/build-push-action@v4
+        with:
+          context: Tracktor/
+          file: Tracktor/deployable projects/AlarmAPI/Dockerfile
+          push: true
+          tags: magnusovergaard/alarm-api:latest
+          
+  build-and-push-alarm_consumer:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout repo
+        uses: actions/checkout@v3
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+     
+      - name: Build and push AlarmConsumer
+        uses: docker/build-push-action@v4
+        with:
+          context: Tracktor/
+          file: Tracktor/deployable projects/AlarmConsumer/Dockerfile
+          push: true
+          tags: magnusovergaard/alarm_consumer:latest
+          
+  build-and-push-location-consumer:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout repo
+        uses: actions/checkout@v3
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+       
+      - name: Build and push LocationConsumer
+        uses: docker/build-push-action@v4
+        with:
+          context: Tracktor/
+          file: Tracktor/deployable projects/LocationConsumer/Dockerfile
+          push: true
+          tags: magnusovergaard/location-consumer:latest
+          
+  build-and-push-location-api:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout repo
+        uses: actions/checkout@v3
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+       
+      - name: Build and push LocationApi
+        uses: docker/build-push-action@v4
+        with:
+          context: Tracktor/
+          file: Tracktor/deployable projects/LocationApi/Dockerfile
+          push: true
+          tags: magnusovergaard/location-api:latest
+          
+  build-and-push-location-retrieval-api:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout repo
+        uses: actions/checkout@v3
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+       
+      - name: Build and push LocationRetrievalApi
+        uses: docker/build-push-action@v4
+        with:
+          context: Tracktor/
+          file: Tracktor/deployable projects/LocationRetrievalApi/Dockerfile
+          push: true
+          tags: magnusovergaard/location-retrieval-api:latest
+            
