@@ -1,5 +1,6 @@
 ﻿using System.Globalization;
 using Cassandra;
+using LocationConsumer.Helper;
 using SharedModels;
 
 namespace LocationConsumer.Repo;
@@ -32,7 +33,7 @@ public class LocationRepo : ILocationRepo
         
         foreach (var location in locations)
         {
-            var weekYear = BucketWeekYear(location.Timestamp);  
+            var weekYear = BucketCalculation.BucketWeekYear(location.Timestamp);  
             
             var boundStatementVehicle = preparedStatementVehicle.Bind(
                 location.VehicleId,
@@ -43,7 +44,7 @@ public class LocationRepo : ILocationRepo
             );
             tasks.Add(_cassandraSession.ExecuteAsync(boundStatementVehicle));
 
-            var hourDate = BucketHourDate(location.Timestamp);  
+            var hourDate = BucketCalculation.BucketHourDate(location.Timestamp);  
 
             
             var boundStatementFleet = preparedStatementFleet.Bind(
@@ -60,27 +61,5 @@ public class LocationRepo : ILocationRepo
         await Task.WhenAll(tasks);
         
         return "Inserted locations successfully";
-    }
-
-    //follows the rules of ISO 8601 
-    public string BucketWeekYear(DateTime timestamp)
-    {
-        var week = ISOWeek.GetWeekOfYear(timestamp);
-        
-        var year = timestamp.ToString("yyyy");
-        
-        //examples 1-2024 or 12-2025
-        var result = week + "-" + year;
-
-        return result;
-    }
-    
-    public string BucketHourDate(DateTime timestamp)
-    {
-        //examples 11-30-00-2024 ie "hh-dd-mm-yyyy"
-        //CHANGING the capital in formating for HH to hh would make it 12formating instead of 24
-        var hourDate = timestamp.ToString("HH-dd-MM-yyyy");
-        
-        return hourDate;
     }
 }
