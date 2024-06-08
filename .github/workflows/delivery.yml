@@ -68,7 +68,7 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           context: .
-          file: Tracktor/deployable projects/AlarmConsumer/Dockerfile
+          file: deployable projects/AlarmConsumer/Dockerfile
           push: true
           tags: magnusovergaard/alarm_consumer:latest
           
