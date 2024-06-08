@@ -131,4 +131,3 @@ jobs:
           file: Tracktor/deployable projects/LocationRetrievalApi/Dockerfile
           push: true
           tags: magnusovergaard/location-retrieval-api:latest
-            
