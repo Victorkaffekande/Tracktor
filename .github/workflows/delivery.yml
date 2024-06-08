@@ -40,7 +40,7 @@ jobs:
           context: .
           file: deployable projects/Gateway/Dockerfile
           push: true
-          tags: magnusovergaard/gateway:${{ steps.get_version_gateway.outputs.new_version_gateway}}
+          tags: magnusovergaard/gateway:${{steps.get_version_gateway.outputs.new_version_gateway}}
   get-last-version-alarm-api:
     runs-on: ubuntu-latest
     steps:
@@ -69,7 +69,7 @@ jobs:
           context: .
           file: deployable projects/AlarmAPI/Dockerfile
           push: true
-          tags: magnusovergaard/alarm-api:${{ steps.get_version_alarm_api.outputs.new_version_alarm_api}}
+          tags: magnusovergaard/alarm-api:${{steps.get_version_alarm_api.outputs.new_version_alarm_api}}
   get-last-version-alarm-consumer:
     runs-on: ubuntu-latest
     steps:
@@ -98,7 +98,7 @@ jobs:
           context: .
           file: deployable projects/AlarmConsumer/Dockerfile
           push: true
-          tags: magnusovergaard/alarm_consumer:${{ steps.get_version_alarm_consumer.outputs.new_version_alarm_consumer}}
+          tags: magnusovergaard/alarm_consumer:${{steps.get_version_alarm_consumer.outputs.new_version_alarm_consumer}}
   get-last-version-location-consumer:
     runs-on: ubuntu-latest
     steps:
@@ -127,7 +127,7 @@ jobs:
           context: .
           file: deployable projects/LocationConsumer/Dockerfile
           push: true
-          tags: magnusovergaard/location-consumer:${{ steps.get_version_location_consumer.outputs.new_version_location_consumer}}
+          tags: magnusovergaard/location-consumer:${{steps.get_version_location_consumer.outputs.new_version_location_consumer}}
   get-last-version-location-api:
     runs-on: ubuntu-latest
     steps:
@@ -156,7 +156,7 @@ jobs:
           context: .
           file: deployable projects/LocationAPI/Dockerfile
           push: true
-          tags: magnusovergaard/location-api:${{ steps.get_version_location_api.outputs.new_version_location_api}}
+          tags: magnusovergaard/location-api:${{steps.get_version_location_api.outputs.new_version_location_api}}
   get-last-version-location-retrieval-api:
     runs-on: ubuntu-latest
     steps:
@@ -185,4 +185,4 @@ jobs:
           context: .
           file: deployable projects/LocationRetrievalApi/Dockerfile
           push: true
-          tags: magnusovergaard/location-retrieval-api:${{ steps.get_version_location_retrieval_api.outputs.new_version_location_retrieval_api}}
+          tags: magnusovergaard/location-retrieval-api:${{steps.get_version_location_retrieval_api.outputs.new_version_location_retrieval_api}}
