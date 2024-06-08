@@ -12,15 +12,6 @@ on:
         default: 'warning'
 
 jobs:
-  get-last-version-gateway:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Retrieve last image version for Gateway
-        id: get_version_gateway
-        run: |
-          LAST_VERSION=$(curl -s https://registry.hub.docker.com/v2/repositories/magnusovergaard/gateway/tags/?page_size=1 | jq -r '.results[0].name' | cut -d'-' -f2)
-          echo "::set-output name=LAST_VERSION::$LAST_VERSION"
-
   build-and-push-gateway:
     runs-on: ubuntu-latest
     steps:
