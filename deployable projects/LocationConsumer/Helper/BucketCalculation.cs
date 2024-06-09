@@ -9,7 +9,7 @@ public class BucketCalculation
     {
         var week = ISOWeek.GetWeekOfYear(timestamp);
         
-        var year = timestamp.ToString("yyyy");
+        var year = ISOWeek.GetYear(timestamp);
         
         //examples 1-2024 or 12-2025
         var result = week + "-" + year;

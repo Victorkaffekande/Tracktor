@@ -13,11 +13,11 @@ public class TestLocationConsumerBuckets
 
 
   [Theory]
-  [InlineData("2024-01-01T00:00:00Z", "1-2024")]
-  [InlineData("2024-06-08T00:00:00Z", "23-2024")]
-  [InlineData("2023-12-31T00:00:00Z", "52-2023")]
-  [InlineData("2025-05-19T00:00:00Z", "21-2025")]
-  [InlineData("2024-12-31T23:59:59Z", "1-2025")] 
+  [InlineData("2024-01-01T00:00:00", "1-2024")]
+  [InlineData("2024-06-08T00:00:00", "23-2024")]
+  [InlineData("2023-12-31T00:00:00", "52-2023")]
+  [InlineData("2025-05-19T00:00:00", "21-2025")]
+  [InlineData("2024-12-31T23:59:59", "1-2025")] 
   public void BucketWeekYearTest(string timestampString, string expectedBucket)
   {
 
