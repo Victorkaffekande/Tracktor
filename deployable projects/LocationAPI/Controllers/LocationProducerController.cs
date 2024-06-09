@@ -25,7 +25,7 @@ public class LocationProducerController : ControllerBase
             Key = locationMessage.VehicleId.ToString(),
             Value = locationMessage
         };
-        //TODO figure out how to see if message didn't send, and handle failed messages? (Maybe)
+
         var res = await _producer.ProduceAsync(LocationsTopicName, message);
         _producer.Flush();
         return Ok(res.Value);
