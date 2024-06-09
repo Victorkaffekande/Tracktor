@@ -17,7 +17,7 @@ public class TestLocationConsumerBuckets
   [InlineData("2024-06-08T00:00:00Z", "23-2024")]
   [InlineData("2023-12-31T00:00:00Z", "52-2023")]
   [InlineData("2025-05-19T00:00:00Z", "21-2025")]
-  [InlineData("2024-12-31T23:59:59Z", "1-2025")]  // Assuming 2024-12-31 falls in the first week of 2025
+  [InlineData("2024-12-31T23:59:59Z", "1-2025")] 
   public void BucketWeekYearTest(string timestampString, string expectedBucket)
   {
 
