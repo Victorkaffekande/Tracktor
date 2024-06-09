@@ -20,6 +20,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharedClasses", "shared\Sha
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LocationRetrievalApi", "deployable projects\LocationRetrievalApi\LocationRetrievalApi.csproj", "{3188CBD3-8963-4BFB-89B2-092DBE24B8AF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LocationConsumer.Test", "tests\LocationConsumer.Test\LocationConsumer.Test.csproj", "{8235C2C1-12E7-4B28-B59C-E98432433C1A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -71,5 +73,9 @@ Global
 		{3188CBD3-8963-4BFB-89B2-092DBE24B8AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3188CBD3-8963-4BFB-89B2-092DBE24B8AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3188CBD3-8963-4BFB-89B2-092DBE24B8AF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8235C2C1-12E7-4B28-B59C-E98432433C1A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8235C2C1-12E7-4B28-B59C-E98432433C1A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8235C2C1-12E7-4B28-B59C-E98432433C1A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8235C2C1-12E7-4B28-B59C-E98432433C1A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
